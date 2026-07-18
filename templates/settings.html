@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Settings{% endblock %}
+{% block content %}
+<div class="card p-4" style="max-width:500px; margin:0 auto;">
+  <h4 class="mb-3"><i class="bi bi-gear"></i> Account Settings</h4>
+  <form method="POST" action="{{ url_for('auth.settings') }}">
+    <div class="mb-3">
+      <label class="form-label">Current Password</label>
+      <input type="password" name="current_password" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">New Password</label>
+      <input type="password" name="new_password" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Password</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,122 @@
+:root {
+  --primary: #4f46e5;
+  --primary-dark: #4338ca;
+  --bg: #f5f6fb;
+  --card-bg: #ffffff;
+  --text: #1f2333;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --success: #16a34a;
+  --danger: #dc2626;
+  --warning: #d97706;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* ---------- Navbar ---------- */
+.navbar-brand {
+  font-weight: 700;
+  color: var(--primary) !important;
+}
+
+.navbar {
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+}
+
+/* ---------- Cards ---------- */
+.card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.stat-card {
+  border-radius: 14px;
+  padding: 1.25rem;
+  color: #fff;
+}
+
+.stat-card.blue { background: linear-gradient(135deg, #4f46e5, #6366f1); }
+.stat-card.green { background: linear-gradient(135deg, #16a34a, #22c55e); }
+.stat-card.orange { background: linear-gradient(135deg, #d97706, #f59e0b); }
+.stat-card.red { background: linear-gradient(135deg, #dc2626, #ef4444); }
+
+.stat-card .stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+/* ---------- Buttons ---------- */
+.btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
+/* ---------- Badges ---------- */
+.badge-danger { background-color: var(--danger); color: #fff; }
+.badge-warning { background-color: var(--warning); color: #fff; }
+.badge-success { background-color: var(--success); color: #fff; }
+.badge-secondary { background-color: #9ca3af; color: #fff; }
+
+/* ---------- Auth pages ---------- */
+.auth-wrapper {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-card {
+  max-width: 420px;
+  width: 100%;
+  padding: 2rem;
+}
+
+/* ---------- Inbox list ---------- */
+.email-row {
+  border-bottom: 1px solid var(--border);
+  padding: 0.9rem 1rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.email-row:hover { background: #f9fafc; }
+.email-row.unread { font-weight: 600; }
+
+.email-subject { color: var(--text); }
+.email-preview { color: var(--muted); font-size: 0.85rem; }
+
+/* ---------- AI reply box ---------- */
+.ai-reply-box textarea {
+  min-height: 220px;
+}
+
+.ai-loading {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted);
+}
+
+/* ---------- Misc ---------- */
+.landing-hero {
+  padding: 5rem 1rem;
+  text-align: center;
+}
+
+footer {
+  padding: 1.5rem 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}

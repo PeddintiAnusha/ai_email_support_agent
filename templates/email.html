@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}{{ email.subject }}{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-start mb-3">
+  <div>
+    <h4 class="mb-1">{{ email.subject }}</h4>
+    <div class="text-muted">
+      From: <strong>{{ email.sender }}</strong> &rarr; To: {{ email.receiver }}
+      <br>{{ email.created_at.strftime("%b %d, %Y %I:%M %p") if email.created_at else "" }}
+    </div>
+  </div>
+  <div class="text-end">
+    <span class="badge {{ priority_badge_class(email.priority) }}">{{ email.priority }} priority</span>
+    <span class="badge {{ sentiment_badge_class(email.sentiment) }}">{{ email.sentiment }}</span>
+    <span class="badge bg-light text-dark border">{{ email.category }}</span>
+    {% if email.is_spam %}<span class="badge bg-dark">Spam</span>{% endif %}
+  </div>
+</div>
+
+<div class="card p-4 mb-3">
+  <p style="white-space: pre-wrap;">{{ email.body }}</p>
+</div>
+
+<div class="d-flex gap-2 mb-4">
+  <a href="{{ url_for('ai.ai_reply_page', email_id=email.id) }}" class="btn btn-primary">
+    <i class="bi bi-robot"></i> Generate AI Reply
+  </a>
+  <form method="POST" action="{{ url_for('email.toggle_important', email_id=email.id) }}">
+    <button type="submit" class="btn btn-outline-warning">
+      <i class="bi bi-star{{ '-fill' if email.is_important else '' }}"></i>
+      {{ "Unmark" if email.is_important else "Mark" }} Important
+    </button>
+  </form>
+  <form method="POST" action="{{ url_for('email.delete_email', email_id=email.id) }}" onsubmit="return confirm('Delete this email?');">
+    <button type="submit" class="btn btn-outline-danger"><i class="bi bi-trash"></i> Delete</button>
+  </form>
+  <a href="{{ url_for('email.inbox') }}" class="btn btn-outline-secondary">Back to Inbox</a>
+</div>
+
+{% if latest_reply %}
+<div class="card p-4">
+  <h6 class="text-muted">Latest AI Reply Draft</h6>
+  <p style="white-space: pre-wrap;">{{ latest_reply.final_text() }}</p>
+</div>
+{% endif %}
+{% endblock %}

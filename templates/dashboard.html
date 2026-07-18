@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h3 class="mb-4">Welcome back, {{ current_user.name }} 👋</h3>
+
+<div class="row g-3 mb-4">
+  <div class="col-md-3">
+    <div class="stat-card blue">
+      <div class="stat-number">{{ stats.inbox_count }}</div>
+      <div>Inbox</div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="stat-card green">
+      <div class="stat-number">{{ stats.sent_count }}</div>
+      <div>Sent</div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="stat-card orange">
+      <div class="stat-number">{{ stats.pending_count }}</div>
+      <div>Pending</div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="stat-card red">
+      <div class="stat-number">{{ stats.urgent_count }}</div>
+      <div>Urgent</div>
+    </div>
+  </div>
+</div>
+
+<div class="card p-3">
+  <h5 class="mb-3">Recent Emails</h5>
+  {% if stats.recent_emails %}
+    {% for e in stats.recent_emails %}
+      <a href="{{ url_for('email.view_email', email_id=e.id) }}" class="text-decoration-none text-dark">
+        <div class="email-row d-flex justify-content-between align-items-center">
+          <div>
+            <div class="email-subject">{{ e.subject }}</div>
+            <div class="email-preview">From: {{ e.sender }}</div>
+          </div>
+          <div>
+            <span class="badge {{ priority_badge_class(e.priority) }}">{{ e.priority }}</span>
+            <span class="badge {{ sentiment_badge_class(e.sentiment) }}">{{ e.sentiment }}</span>
+          </div>
+        </div>
+      </a>
+    {% endfor %}
+  {% else %}
+    <p class="text-muted mb-0">No emails yet. Try <a href="{{ url_for('email.simulate_inbound') }}">simulating an inbound email</a>.</p>
+  {% endif %}
+</div>
+{% endblock %}

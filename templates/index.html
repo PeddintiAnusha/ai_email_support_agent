@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Welcome - AI Email Support Agent{% endblock %}
+{% block content %}
+<div class="landing-hero">
+  <h1 class="display-5 fw-bold mb-3"><i class="bi bi-robot text-primary"></i> AI Email Support Agent</h1>
+  <p class="lead text-muted mb-4">
+    Read customer emails, understand intent, and generate professional replies in seconds.
+  </p>
+  <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-lg me-2">Get Started</a>
+  <a href="{{ url_for('auth.login') }}" class="btn btn-outline-secondary btn-lg">Login</a>
+</div>
+
+<div class="row g-4 mt-4">
+  <div class="col-md-4">
+    <div class="card p-4 h-100">
+      <i class="bi bi-lightning-charge fs-2 text-primary mb-2"></i>
+      <h5>Faster Replies</h5>
+      <p class="text-muted mb-0">Generate polished, professional replies instantly instead of typing from scratch.</p>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card p-4 h-100">
+      <i class="bi bi-emoji-smile fs-2 text-primary mb-2"></i>
+      <h5>Sentiment & Priority Detection</h5>
+      <p class="text-muted mb-0">Automatically flag urgent or negative emails so nothing important slips through.</p>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card p-4 h-100">
+      <i class="bi bi-tags fs-2 text-primary mb-2"></i>
+      <h5>Smart Categorization</h5>
+      <p class="text-muted mb-0">Emails are auto-sorted into complaints, refunds, shipping issues, and more.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}AI Reply{% endblock %}
+{% block content %}
+<h4 class="mb-3"><i class="bi bi-robot text-primary"></i> AI Assistant</h4>
+
+<div class="card p-3 mb-3">
+  <div class="text-muted small">Original email from {{ email.sender }}</div>
+  <div class="fw-semibold">{{ email.subject }}</div>
+  <p class="mb-0 mt-2" style="white-space: pre-wrap;">{{ email.body }}</p>
+</div>
+
+<div class="card p-4 ai-reply-box">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h6 class="mb-0">Reply Draft</h6>
+    <div id="aiLoading" class="ai-loading">
+      <div class="spinner-border spinner-border-sm text-primary"></div> Generating...
+    </div>
+  </div>
+
+  <textarea id="replyTextarea" class="form-control mb-3">{{ latest_reply.final_text() if latest_reply else "" }}</textarea>
+
+  <div class="mb-3">
+    <span class="text-muted small">AI Summary: </span>
+    <span id="summaryBox">{{ latest_reply.summary if latest_reply else "" }}</span>
+  </div>
+
+  <div class="d-flex gap-2">
+    <button id="generateReplyBtn" class="btn btn-primary">
+      <i class="bi bi-magic"></i> {{ "Regenerate" if latest_reply else "Generate Reply" }}
+    </button>
+    <button id="saveEditBtn" class="btn btn-outline-secondary" {{ "disabled" if not latest_reply }}>
+      <i class="bi bi-save"></i> Save Edit
+    </button>
+    <button id="sendReplyBtn" class="btn btn-success" {{ "disabled" if not latest_reply }}>
+      <i class="bi bi-send-check"></i> Send Reply
+    </button>
+  </div>
+</div>
+{% endblock %}
